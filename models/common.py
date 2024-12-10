@@ -84,6 +84,7 @@ class Conv(nn.Module):
 
     def forward(self, x):
         """Applies a convolution followed by batch normalization and an activation function to the input tensor `x`."""
+        print(f"Conv: {x.size()}")
         return self.act(self.bn(self.conv(x)))
 
     def forward_fuse(self, x):
@@ -244,7 +245,9 @@ class C3(nn.Module):
 
     def forward(self, x):
         """Performs forward propagation using concatenated outputs from two convolutions and a Bottleneck sequence."""
-        return self.cv3(torch.cat((self.m(self.cv1(x)), self.cv2(x)), 1))
+        ret = self.cv3(torch.cat((self.m(self.cv1(x)), self.cv2(x)), 1))
+        print(f"C3 size: {x.size()} -> {ret.size()}")
+        return ret
 
 
 class C3x(C3):
@@ -453,6 +456,7 @@ class Concat(nn.Module):
         """Concatenates a list of tensors along a specified dimension; `x` is a list of tensors, `dimension` is an
         int.
         """
+        print(f"concat: {[t.size() for t in x]}")
         return torch.cat(x, self.d)
 
 
