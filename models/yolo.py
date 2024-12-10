@@ -25,6 +25,8 @@ if str(ROOT) not in sys.path:
 if platform.system() != "Windows":
     ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
 
+from cbam import CBAM;
+
 from models.common import (
     C3,
     C3SPP,
@@ -48,6 +50,7 @@ from models.common import (
     GhostBottleneck,
     GhostConv,
     Proto,
+
 )
 from models.experimental import MixConv2d
 from utils.autoanchor import check_anchor_order
@@ -420,6 +423,7 @@ def parse_model(d, ch):
             nn.ConvTranspose2d,
             DWConvTranspose2d,
             C3x,
+            CBAM,
         }:
             c1, c2 = ch[f], args[0]
             if c2 != no:  # if not output
