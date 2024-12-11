@@ -1,3 +1,5 @@
+# This implementation is from https://github.com/Jongchan/attention-module
+
 import torch
 import math
 import torch.nn as nn
